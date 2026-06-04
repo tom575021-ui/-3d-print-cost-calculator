@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Streamlit local secrets and runtime files
+.streamlit/secrets.toml
+.streamlit/config.toml
+
+# Local working folders created by Codex or exports
+work/
+outputs/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Local data exports
+*.log
+*.tmp
