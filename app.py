@@ -56,16 +56,15 @@ def float_input(
     max_value: float | None = None,
     step: float = 1.0,
     help_text: str | None = None,
-    number_format: str = "%.2f",
 ) -> float:
     return float(
         st.number_input(
             label,
-            min_value=None if min_value is None else float(min_value),
+            min_value=float(min_value),
             max_value=None if max_value is None else float(max_value),
             value=float(value),
-            step=None if step is None else float(step),
-            format=number_format,
+            step=float(step),
+            format="%.2f",
             help=help_text,
         )
     )
@@ -78,16 +77,15 @@ def int_input(
     max_value: int | None = None,
     step: int = 1,
     help_text: str | None = None,
-    number_format: str = "%d",
 ) -> int:
     return int(
         st.number_input(
             label,
-            min_value=None if min_value is None else int(min_value),
+            min_value=int(min_value),
             max_value=None if max_value is None else int(max_value),
             value=int(value),
-            step=None if step is None else int(step),
-            format=number_format,
+            step=int(step),
+            format="%d",
             help=help_text,
         )
     )
@@ -129,14 +127,11 @@ def build_input_from_widgets() -> PrintJobInput:
             min_value=0.0,
             max_value=95.0,
             step=0.1,
-            number_format="%.1f",
         ) / 100
 
     with col_b:
         st.subheader("打印与设备")
-        print_hours = float_input(
-            "打印时间（小时）", 6.5, min_value=0.1, step=0.1, number_format="%.1f"
-        )
+        print_hours = float_input("打印时间（小时）", 6.5, min_value=0.1, step=0.1)
         printer_power_w = float_input("打印机平均功率（W）", 120.0, step=1.0)
         electricity_price_per_kwh = float_input("电价 / kWh", default_electricity_price, step=0.1)
         machine_purchase_price = float_input("设备购置成本", default_machine_price, step=1.0)
@@ -149,7 +144,7 @@ def build_input_from_widgets() -> PrintJobInput:
 
     with col_c:
         st.subheader("人工与杂费")
-        labor_hours = float_input("人工时间（小时）", 0.6, step=0.1, number_format="%.1f")
+        labor_hours = float_input("人工时间（小时）", 0.6, step=0.1)
         labor_rate_per_hour = float_input("人工单价 / 小时", default_labor_rate, step=1.0)
         packaging_cost = float_input("包装成本 / 单", 3.0, step=0.1)
         other_fixed_cost = float_input("其他固定成本 / 单", 2.0, step=0.1)
@@ -162,7 +157,6 @@ def build_input_from_widgets() -> PrintJobInput:
             min_value=0.0,
             max_value=95.0,
             step=0.1,
-            number_format="%.1f",
         ) / 100
         platform_fee_rate = float_input(
             "平台佣金 / 手续费（%）",
@@ -170,7 +164,6 @@ def build_input_from_widgets() -> PrintJobInput:
             min_value=0.0,
             max_value=80.0,
             step=0.1,
-            number_format="%.1f",
         ) / 100
         target_profit_margin = float_input(
             "目标利润率（%）",
@@ -178,7 +171,6 @@ def build_input_from_widgets() -> PrintJobInput:
             min_value=0.0,
             max_value=90.0,
             step=0.1,
-            number_format="%.1f",
         ) / 100
         override_unit_price = float_input(
             "手动售价 / 件（填 0 使用建议售价）",
